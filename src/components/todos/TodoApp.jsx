@@ -16,15 +16,7 @@ const TodoApp = () => {
   }
   //   Refresh bolgondo local storage jogolup ketbesh ychyn
 
-  function getDate(separator = "") {
-    let newDate = new Date();
-    let date = newDate.getDate();
-    let hour = newDate.getHours();
-    let minute = newDate.getMinutes();
-    return `${separator}${
-      minute < 10 ? `0${minute}` : `${minute}`
-    }.${`${hour}.${date}${separator}`}`;
-  }
+
   //   Data kogda dobavlaem todo list
 
   const addTodoHandler = (text) => {
@@ -32,7 +24,7 @@ const TodoApp = () => {
       text: text,
       isCompleted: false,
       id: Math.floor(Math.random() * 10000), // Generate random id
-      date: getDate(),
+      date: new Date().toLocaleString(),
     };
     // console.log(newTodo);
     setTodos([...todos, newTodo]);
@@ -47,12 +39,17 @@ const TodoApp = () => {
   const toggleTodoHandler = (id) => {
     setTodos(
       todos.map((todo) => {
-        return todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
-          : { ...todo };
+        if (todo.id === id) {
+          return {
+            ...todo,
+            isCompleted: !todo.isCompleted,
+            date: new Date().toLocaleString(),
+          };
+        }
+        return todo;
       })
     );
-  };
+  }; 
   //   Function dly galochki zavershilsya ili net
   const resetTodosHandler = () => {
     setTodos([]);
@@ -78,7 +75,7 @@ const TodoApp = () => {
           ? {
               ...todo,
               text: changeText,
-              data: getDate(),
+              data: new Date().toLocaleString(),
             }
           : todo
       )
