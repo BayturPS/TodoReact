@@ -16,7 +16,6 @@ const TodoApp = () => {
   }
   //   Refresh bolgondo local storage jogolup ketbesh ychyn
 
-
   //   Data kogda dobavlaem todo list
 
   const addTodoHandler = (text) => {
@@ -49,7 +48,7 @@ const TodoApp = () => {
         return todo;
       })
     );
-  }; 
+  };
   //   Function dly galochki zavershilsya ili net
   const resetTodosHandler = () => {
     setTodos([]);
